@@ -1,0 +1,90 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        release {
+            keyAlias 'yihui'
+            keyPassword '123456789'
+            storeFile file('/Users/zhouxingxing/Desktop/公司资料/yihui.keystore')
+            storePassword '123456789'
+        }
+    }
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.yihui.packdemo"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        flavorDimensions "versionCode"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+//   构建不同的包名的多个包
+    productFlavors {
+        demo01 {
+            applicationId "com.example.a1.demo02_1"
+            manifestPlaceholders = [APP_NAME_VALUE: 'demo_1']
+            signingConfig signingConfigs.release
+
+            manifestPlaceholders = [str         : "releaseStr",
+                                    k_appName   : "demo01",
+                                    APP_ICON    : "@mipmap/app_logo",
+                                    package_name: "com.example.a1.demo02_1"]
+
+            buildConfigField 'String', 'SERVER_URL', '"http://47.96.179.8:10130"'
+            buildConfigField 'String', 'SERVER_H5_URL', '"http://bbftest.51tests.net"'
+            buildConfigField 'int', 'UserType', '1'
+        }
+        demo02 {
+            applicationId "com.example.a1.demo02_2"
+            manifestPlaceholders = [APP_NAME_VALUE: 'demo_2']
+            signingConfig signingConfigs.release
+
+            manifestPlaceholders = [str         : "releaseStr",
+                                    k_appName   : "demo02",
+                                    APP_ICON    : "@mipmap/ic_launcher",
+                                    package_name: "com.example.a1.demo02_2"]
+            buildConfigField 'int', 'UserType', '2'
+        }
+        demo03 {
+            applicationId "com.example.a1.demo02_3"
+            manifestPlaceholders = [APP_NAME_VALUE: 'demo_3']
+            signingConfig signingConfigs.release
+
+            manifestPlaceholders = [str         : "releaseStr",
+                                    k_appName   : "demo03",
+                                    APP_ICON    : "@mipmap/app_logo",
+                                    package_name: "com.example.a1.demo02_3"]
+
+            buildConfigField 'int', 'UserType', '3'
+        }
+        demo04 {
+            applicationId "com.example.a1.demo02_4"
+            manifestPlaceholders = [APP_NAME_VALUE: 'demo_4']
+            signingConfig signingConfigs.release
+
+            manifestPlaceholders = [str         : "releaseStr",
+                                    k_appName   : "demo04",
+                                    APP_ICON    : "@mipmap/ic_launcher",
+                                    package_name: "com.example.a1.demo02_4"]
+
+            buildConfigField 'int', 'UserType', '4'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
