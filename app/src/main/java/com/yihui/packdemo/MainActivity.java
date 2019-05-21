@@ -12,5 +12,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         TextView tv = findViewById(R.id.tv_name);
         tv.setText(ConfigDef.UserName.getUserName());
+        //这是dev
     }
 }
